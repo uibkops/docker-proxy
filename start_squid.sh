@@ -35,6 +35,19 @@ function init-cache() {
     [ -e /var/spool/squid3/swap.state ] || squid3 -z 2>/dev/null
 }
 
+function setvars() {
+    # SET THE ENVIRONMENT VARIABLES
+    if [ -z "$CACHE_PEER" ] ; then
+	echo "CACHE_PEER _must_ be defined"
+	exit 1
+    fi
+    export CACHE_PEER
+    export CACHE_PEER_PORT=${CACHE_PEER_PORT=:-"3128"}
+    return $?
+}
+
+setvars || exit 1
+j2 /etc/squid3/squid_template.conf > /etc/squid3/squid.conf
 gen-cert || exit 1
 start-routing || exit 1
 init-cache

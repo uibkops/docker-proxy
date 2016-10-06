@@ -18,7 +18,7 @@ Modify docker-compose.yml and set the environment variables.
 add a DNAT rule to forward HTTP traffic originating from the container to port 3129. Dockers Masquerading in this case (POSTROUTING) will not kick in first.
 
 ```
-sudo docker build -t docker-proxy .
+sudo docker build -t docker-proxy --build-arg=http_proxy="http://YOURPROXY:3128" --build-arg=https_proxy="http://YOURPROXY:3128" .
 ```
 
 Then run with:

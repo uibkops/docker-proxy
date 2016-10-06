@@ -16,6 +16,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux \
         patch \
         squid-langpack \
         ssl-cert \
+        python-pip \
     && apt-get source -y squid3 squid-langpack \
     && apt-get build-dep -y squid3 squid-langpack
 
@@ -34,8 +35,9 @@ RUN cd squid3-3.?.? \
         ../squid3_3.?.?-?ubuntu?.?_*.deb \
     && mkdir -p /etc/squid3/ssl_cert \
     && cat /root/mime.conf >> /usr/share/squid3/mime.conf
+RUN pip install j2cli
 
-COPY squid.conf /etc/squid3/squid.conf
+COPY squid_template.conf /etc/squid3/squid_template.conf
 COPY start_squid.sh /usr/local/bin/start_squid.sh
 
 VOLUME /var/spool/squid3 /etc/squid3/ssl_cert
