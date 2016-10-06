@@ -4,8 +4,8 @@ proxy:
   container_name: docker-proxy
   restart: always
   environment:
-    cache_peer: 'proxy.uibk.ac.at'      # upstream cache peer
-    cache_peer_port: '3128'      # upstream cache peer port
+    CACHE_PEER: 'proxy.uibk.ac.at'      # upstream cache peer
+    CACHE_PEER_PORT: '3128'      # upstream cache peer port
   privileged: true
   ports:
     - "3129:3129"
