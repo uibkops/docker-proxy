@@ -9,6 +9,8 @@ This container has been modified to support cache_peers. (another proxy to forwa
 It has also been changed in the sense that squid ports (e.g. 3129) are now exposed. The reason for this is, that the approach used in the project we forked from, to route to the internal container running squid via ip rule / ip route / iptables rules doesn´t seem to work anymore in newer Docker versions, due to the DOCKER_ISOLATION chain, which prevents containers running in different docker networks from communicating with each other.
 Therefore we recommend using a DNAT rule.
 
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to 172.24.0.80:3129
+
 ## Instructions for Use
 
 Modify docker-compose.yml and set the environment variables.
@@ -24,10 +26,9 @@ Then run with:
 ```
 docker-compose up docker-proxy
 ```
-
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to 172.24.0.80:3129
 Your other Docker containers will automatically use
-the proxy, whether or not they were already running. When you are finished,
-just press <kbd>Ctrl</kbd><kbd>C</kbd> to stop the proxy.
+the proxy, whether or not they were already running.
 
 NOTE: This project is _not_ designed to be run with a simple `docker run` - it
 requires you set an additional DNAT rule to be run on the docker host. There might be a way of using --net:host to tun on the host directly.

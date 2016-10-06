@@ -1,5 +1,6 @@
 proxy:
-  image: universityinnsbruck/docker-proxy:latest
+  #image: universityinnsbruck/docker-proxy:latest
+  image: docker-proxy:latest
   container_name: docker-proxy
   restart: always
   environment:
