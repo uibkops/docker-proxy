@@ -1,0 +1,15 @@
+proxy:
+  image: universityinnsbruck/docker-proxy:latest
+  #image: docker-proxy:latest
+  container_name: docker-proxy
+  restart: always
+  environment:
+    CACHE_PEER: 'address' # upstream cache peer
+    CACHE_PEER_PORT: '3128'      # upstream cache peer port
+  privileged: true
+  ports:
+    - "3129:3129"
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - ./cache:/var/spool/squid3
+    - ./certs:/etc/squid3/ssl_cert
