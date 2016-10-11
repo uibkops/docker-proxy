@@ -1,6 +1,6 @@
 # docker-proxy
 
-Transparent caching proxy server for Docker containers, run in a Docker
+Transparent caching proxy server for Docker containers with cache_peer, run in a Docker
 container. It can speed up the dependency-fetching part of your application
 build process.
 
