@@ -2,7 +2,7 @@ proxy:
   #image: universityinnsbruck/docker-proxy:latest
   image: docker-proxy:latest
   container_name: docker-proxy
-  restart: always
+  #restart: always
   environment:
     CACHE_PEER: 'proxy.uibk.ac.at'      # upstream cache peer
     CACHE_PEER_PORT: '3128'      # upstream cache peer port
