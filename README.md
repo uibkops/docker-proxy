@@ -11,6 +11,12 @@ Therefore we recommend using a DNAT rule.
 
 iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to <YOUR EXTERNAL IP OF THE CONTAINER HOST>172.24.0.80:3129
 
+Watch you iptables rules to see where packet go:
+
+```
+watch iptables -nvL
+```
+
 ## Instructions for Use
 
 Modify docker-compose.yml and set the environment variables.
